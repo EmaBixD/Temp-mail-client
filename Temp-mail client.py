@@ -1,10 +1,12 @@
-import os
 from mailtm import Email
+import os
+
+def listener(message):
+    print("\n[-] Subject: " + message['subject'] + "\nContent: " + message['text'] if message['text'] else message['html'])
 
 def menu():
     os.system('cls')
-    print("Temp-mail client by Ema - powered by https://mail.tm/\n\n┌───────────┬──────────┬─────────────┐\n│ 1: Create │ 2: Login │ Enter: exit │\n├───────────┴──────────┴─────────────┘")
-    choice=input("└ ")
+    choice=input("Temp-mail client by Ema - powered by https://mail.tm/\n\n┌───────────┬──────────┬─────────────┐\n│ 1: Create │ 2: Login │ Enter: exit │\n├───────────┴──────────┴─────────────┘\n└ ")
     if choice == "1":
         create()
     elif choice == "2":
@@ -15,26 +17,16 @@ def menu():
     else:
         menu()
 
-def listener(message):
-    print("\n[-] Subject: " + message['subject'])
-    print("Content: " + message['text'] if message['text'] else message['html'])
-
 def create():
     os.system('cls')
-    print("Create\n")
-    username = input("[+] Username (leave blank for random): ")
-    password = input("\n[+] Create password: ")
-    test.register(username=username, password=password)        
+    test.register(username=input("Create\n\n[+] Username (leave blank for random): "), domain=input("\n[+] Domain (leave blank for random): "), password=input("\n[+] Create password: ")) # awgarstone.com - mailtub.com
     print("\n[!] Email adress created: " + test.address)
     start()
 
 def login():
     os.system('cls')
-    print("Login\n")
-    address = input("[+] Email adress: ")
-    password = input("\n[+] Password: ")
-    test.address=address
-    test.get_token(password=password)
+    test.address = input("Login\n\n[+] Email adress: ")
+    test.get_token(password=input("\n[+] Password: "))
     print("\n[!] Logged in as: " + test.address)
     start()
 
